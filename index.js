@@ -54,7 +54,29 @@ async function run() {
         const query = {_id: new ObjectId(id)}
         const result = await productCollection.findOne(query);
         res.send(result);
-    })
+    });
+
+    //Update a single Product
+    app.put('/product/update/:id', async(req,res) => {
+        const id =  req.params.id;
+        const filter = {_id : new ObjectId(id)};
+        const options = { upsert: true };
+        const productInfo = req.body;
+        const updatedProduct = {
+            $set:{
+                name:productInfo.name,
+                type:productInfo.type,
+                price:productInfo.price,
+                rating:productInfo.rating,
+                photo:productInfo.photo,
+                brand:productInfo.brand,
+                shortDescription:productInfo.shortDescription
+            }
+        }
+        const result = await productCollection.updateOne(filter,updatedProduct,options);
+        res.send(result);
+
+    });
 
 
     // Send a ping to confirm a successful connection
