@@ -62,6 +62,17 @@ async function run() {
         res.send(result)
     })
 
+    //Delete a single cart products
+    app.delete('/cart/:id', async(req,res) => {
+
+        const id = req.params.id;
+        const query = {_id : new ObjectId(id)};
+        const result = await cartCollection.deleteOne(query);
+
+        res.send(result);
+
+    })
+
     //get single product by id
     app.get('/product/:id', async(req,res) => {
 
