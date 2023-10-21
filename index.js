@@ -26,7 +26,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const database = client.db("brandDB");
     const productCollection = database.collection("product");
@@ -123,7 +123,7 @@ run().catch(console.dir);
 
 //server initialize
 app.get('/', (req,res) => {
-    res.send('Coffee Server is Running')
+    res.send('Brand Server is Running')
 });
 
 app.listen(port, (req,res) => {
